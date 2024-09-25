@@ -14,6 +14,7 @@
     "antd": "^5.21.1",
     "react": "rc",
     "react-dom": "rc",
+    "swiper": "^11.1.14",
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
