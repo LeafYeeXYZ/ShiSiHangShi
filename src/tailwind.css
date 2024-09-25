@@ -4,6 +4,7 @@
 
 * {
   font-family: 'Times', 'Times New Roman', '宋体', 'SimSun', '华文宋体', 'STSong';
+  scrollbar-width: none;
 }
 
 /* 定义关键帧动画，从透明变为不透明 */

@@ -1,17 +1,22 @@
 import { useStates } from '../lib/useStates'
 import { Button } from 'antd'
-import { RedoOutlined } from '@ant-design/icons'
+import { RedoOutlined, DownloadOutlined } from '@ant-design/icons'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
+import { useRef } from 'react'
 
 export default function Verses() {
 
   const { verses, random } = useStates()
 
+  const swiperRef = useRef(null)
+  const save = () => window.print()
+
   return (
     <div className='w-full flex flex-col items-center justify-center'>
+
       <div
-        className='w-full flex flex-row items-center justify-center gap-4 mb-6'
+        className='w-full flex flex-row items-center justify-center gap-4 mb-6 print:hidden'
       >
         <Button
           type='default'
@@ -21,11 +26,13 @@ export default function Verses() {
           <RedoOutlined /> 重新随机
         </Button>
       </div>
+
       <div
         className='w-full flex flex-col items-center justify-center gap-4'
       >
         {verses.map((verse, index) => (
           <Swiper
+            ref={swiperRef}
             key={Math.random()} 
             className='w-full bg-yellow-50 border border-yellow-950 transition-all'
             style={{
@@ -50,6 +57,19 @@ export default function Verses() {
           </Swiper>
         ))}
       </div>
+
+      <div
+        className='w-full flex flex-row items-center justify-center gap-4 mt-6 print:hidden'
+      >
+        <Button
+          type='default'
+          onClick={save}
+          className='rounded-none border border-yellow-950'
+        >
+          <DownloadOutlined /> 保存文档
+        </Button>
+      </div>
+
     </div>
   )
 }
