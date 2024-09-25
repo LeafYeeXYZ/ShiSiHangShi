@@ -2,8 +2,13 @@
 
 export default function Title() {
   return (
-    <div className='w-full h-40 flex items-center justify-center text-3xl'>
-      这里应当是项目标题和封面/徽章等
+    <div className='w-full flex flex-col items-center justify-center gap-4 mb-16 mt-24'>
+      <p className='text-3xl'>
+        无限的十四行诗
+      </p>
+      <p>
+        诗句可以左右滑动
+      </p>
     </div>
   )
 }
