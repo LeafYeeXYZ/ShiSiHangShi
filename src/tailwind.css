@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Times', 'Times New Roman', '宋体', 'SimSun', '华文宋体', 'STSong';
+}
+
+/* 定义关键帧动画，从透明变为不透明 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
