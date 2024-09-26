@@ -122,7 +122,7 @@ export default function Verses() {
 
       <div
         style={{ display: 'none' }}
-        className='w-full h-10 fixed bottom-0 z-50 flex items-center justify-center bg-yellow-950 text-white text-sm'
+        className='w-full h-10 fixed bottom-0 z-50 flex items-center justify-center bg-yellow-950 text-white text-[0.8rem]'
         ref={modalRef}
       >
         如果浏览器没有自动下载, 请<a href='' download='sonnet.png' className='text-yellow-400'>点击这里下载</a>
