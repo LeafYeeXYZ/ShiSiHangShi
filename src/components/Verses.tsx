@@ -21,7 +21,7 @@ export default function Verses() {
   const save = () => {
     imgRef.current!.style.display = 'block'
     containerRef.current!.innerHTML = poemRef.current.map((p) => (
-      `<div class='w-full text-lg text-center p-2'>${p}</div>`
+      `<div class='w-full text-lg text-center px-2'>${p}</div>`
     )).join('')
     html2canvas(imgRef.current!).then((canvas) => {
       imgRef.current!.style.display = 'none'
@@ -50,7 +50,7 @@ export default function Verses() {
         >
           <div
             ref={containerRef}
-            className='w-full flex flex-col items-center justify-center gap-2'
+            className='w-full flex flex-col items-center justify-center gap-2 mb-2 mt-4'
           ></div>
           <QRCode
             value={qrcodes[0].url}
