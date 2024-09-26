@@ -43,14 +43,14 @@ export default function Verses() {
       <div
         style={{ display: 'none' }}
         ref={imgRef}
-        className='w-[20rem] flex flex-col items-center justify-center p-4 absolute -z-50 bg-yellow-50 top-0'
+        className='w-[28rem] flex flex-col items-center justify-center p-4 absolute -z-50 bg-yellow-50 top-0'
       >
         <div
           className='w-full flex flex-col items-center justify-center gap-2 p-4 border border-yellow-950'
         >
           <div
             ref={containerRef}
-            className='w-full flex flex-col items-center justify-center gap-2 mb-2 mt-4'
+            className='w-full flex flex-col items-center justify-center gap-2 mb-2 mt-5'
           ></div>
           <QRCode
             value={QRCODES[0].url}
@@ -94,12 +94,12 @@ export default function Verses() {
             {verse.map((v) => (
               <SwiperSlide
                 key={Math.random()} 
-                className='w-full px-4 py-3'
+                className='w-full px-4 pb-3 pt-[0.7rem]'
               >
-                <p className='text-lg'>
+                <p className='text-lg leading-[1.25] text-balance'>
                   {v.content}
                 </p>
-                <p className='text-xs mt-[0.15rem] pl-[0.1rem] opacity-70'>
+                <p className='text-xs mt-[0.3rem] pl-[0.1rem] opacity-70'>
                   来自: {v.author}
                 </p>
               </SwiperSlide>
