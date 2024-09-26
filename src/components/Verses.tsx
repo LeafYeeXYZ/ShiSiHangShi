@@ -90,6 +90,7 @@ export default function Verses() {
             onSlideChange={(swiper) => {
               poemRef.current[index] = verse[swiper.activeIndex].content
             }}
+            autoHeight={true}
           >
             {verse.map((v) => (
               <SwiperSlide
