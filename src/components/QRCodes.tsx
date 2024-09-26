@@ -19,7 +19,7 @@ export default function QRCodes() {
             size={100}
             className='rounded-none p-2 border border-yellow-950'
           />
-          <p className='text-lg opacity-80'>
+          <p className='text-base opacity-80'>
             {qrcode.desc}
           </p>
         </div>

@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.5.1",
     "antd": "^5.21.1",
+    "html2canvas": "^1.4.1",
     "react": "rc",
     "react-dom": "rc",
     "swiper": "^11.1.14",
