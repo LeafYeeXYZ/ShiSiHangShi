@@ -1,4 +1,4 @@
-import { useStates } from '../lib/useStates'
+import { useStates, QRCODES } from '../lib/useStates'
 import { Button, QRCode } from 'antd'
 import { RedoOutlined, SaveOutlined, CloseOutlined } from '@ant-design/icons'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -8,7 +8,7 @@ import { useRef, useEffect } from 'react'
 
 export default function Verses() {
 
-  const { verses, random, qrcodes } = useStates()
+  const { verses, random } = useStates()
 
   // 以下内容用于保存图片 (用 Ref 是为了避免重复渲染导致当前诗文被覆盖)
   const imgRef = useRef<HTMLDivElement>(null)
@@ -53,7 +53,7 @@ export default function Verses() {
             className='w-full flex flex-col items-center justify-center gap-2 mb-2 mt-4'
           ></div>
           <QRCode
-            value={qrcodes[0].url}
+            value={QRCODES[0].url}
             size={80}
             className='rounded-none p-1 border border-yellow-950 mt-12'
           />

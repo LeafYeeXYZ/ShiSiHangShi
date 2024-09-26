@@ -1,15 +1,13 @@
 import { QRCode } from 'antd'
-import { useStates } from '../lib/useStates'
+import { QRCODES } from '../lib/useStates'
 
 export default function QRCodes() {
-
-  const { qrcodes } = useStates()
   
   return (
     <div
       className='w-full flex flex-row items-center justify-center flex-wrap gap-6 mb-20'
     >
-      {qrcodes.map((qrcode, index) => (
+      {QRCODES.map((qrcode, index) => (
         <div
           key={index}
           className='w-fit flex flex-col items-center justify-center gap-2'
