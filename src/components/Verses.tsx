@@ -1,6 +1,6 @@
 import { useStates } from '../lib/useStates'
 import { Button, QRCode } from 'antd'
-import { RedoOutlined, SaveOutlined } from '@ant-design/icons'
+import { RedoOutlined, SaveOutlined, CloseOutlined } from '@ant-design/icons'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import html2canvas from 'html2canvas'
@@ -10,10 +10,11 @@ export default function Verses() {
 
   const { verses, random, qrcodes } = useStates()
 
-  // 以下内容用于保存图片
+  // 以下内容用于保存图片 (用 Ref 是为了避免重复渲染导致当前诗文被覆盖)
   const imgRef = useRef<HTMLDivElement>(null)
   const poemRef = useRef<string[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     poemRef.current = verses.map((verse) => verse[0].content)
   }, [verses])
@@ -30,6 +31,9 @@ export default function Verses() {
       a.href = url
       a.download = '无限的十四行诗.png'
       a.click()
+      modalRef.current!.style.display = 'flex'
+      modalRef.current!.firstElementChild!.setAttribute('href', url)
+      setTimeout(() => modalRef.current!.style.display = 'none', 5000)
     })
   }
 
@@ -114,6 +118,20 @@ export default function Verses() {
         >
           <SaveOutlined /> 保存当前诗文
         </Button>
+      </div>
+
+      <div
+        style={{ display: 'none' }}
+        className='w-full h-10 fixed bottom-0 z-50 flex items-center justify-center bg-yellow-950 text-white text-sm'
+        ref={modalRef}
+      >
+        如果浏览器没有自动下载, 请<a href='' download='无限的十四行诗.png' className='text-yellow-400'>点击这里下载</a>
+        <div
+          className='w-10 h-10 absolute right-0 top-0 cursor-pointer flex items-center justify-center text-yellow-400 hover:bg-yellow-400 hover:text-yellow-950'
+          onClick={() => modalRef.current!.style.display = 'none'}
+        >
+          <CloseOutlined />
+        </div>
       </div>
 
     </div>
