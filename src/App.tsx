@@ -3,8 +3,12 @@ import Verses from './components/Verses'
 import Introduction from './components/Introduction'
 import QRCodes from './components/QRCodes'
 import { ConfigProvider } from 'antd'
+import { preload } from 'react-dom'
 
 export default function App() {
+
+  // 预加载字体
+  preload('/NotoSerifSC-Regular.ttf', { as: 'font', type: 'font/ttf' })
 
   return (
     <main

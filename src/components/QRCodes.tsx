@@ -7,7 +7,7 @@ export default function QRCodes() {
   
   return (
     <div
-      className='w-full flex flex-row items-center justify-center flex-wrap gap-6 mt-20 mb-24'
+      className='w-full flex flex-row items-center justify-center flex-wrap gap-6 mb-20'
     >
       {qrcodes.map((qrcode, index) => (
         <div
