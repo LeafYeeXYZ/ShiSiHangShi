@@ -4,10 +4,14 @@ import { VERSES } from './allVerses'
 interface State {
   verses: { content: string; author: string }[][]
   random: () => void
+  qrcodes: { desc: string; url: string }[]
 }
 
 const TOTAL_PAGES: number = 14
 const VERSE_PER_PAGE: number = 9
+const QRCODES = [
+  { desc: '体验网页', url: 'https://bnu-sonnet.pages.dev' },
+]
 
 export const useStates = create<State>()((set) => {
   const order = (): { content: string; author: string }[][] => {
@@ -21,5 +25,6 @@ export const useStates = create<State>()((set) => {
   return {
     verses: order(),
     random: () => set({ verses: order() }),
+    qrcodes: QRCODES,
   }
 })

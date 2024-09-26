@@ -1,6 +1,7 @@
 import Title from './components/Title'
 import Verses from './components/Verses'
 import Introduction from './components/Introduction'
+import QRCodes from './components/QRCodes'
 import { ConfigProvider } from 'antd'
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Title />
         <Verses />
         <Introduction />
+        <QRCodes />
       </ConfigProvider>
     </main>
   )
