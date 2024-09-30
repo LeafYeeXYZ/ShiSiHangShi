@@ -45,7 +45,7 @@ export const VERSE_PER_PAGE: number = 2
  * 显示在页面底部的二维码  
  */
 export const QRCODES: { desc: string; url: string, icon?: string }[] = [
-  { desc: '无限的十四行诗', url: 'https://bnu-sonnet.pages.dev' },
+  { desc: '无限的十四行诗', url: 'https://sonnet.leafyee.xyz' },
   { desc: '北师大白鸽青协', url: 'http://weixin.qq.com/r/Q3WGg4PEgkv_KMfgbyDH', icon: '/baige.jpeg' },
 ]
 /**
