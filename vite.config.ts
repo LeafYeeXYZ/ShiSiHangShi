@@ -9,6 +9,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           antd: ['antd', '@ant-design/icons'],
+          swiper: ['swiper'],
+          utils: ['html2canvas'],
         },
       },
     },
