@@ -5,7 +5,7 @@ export default function QRCodes() {
   
   return (
     <div
-      className='w-full flex flex-row items-center justify-center flex-wrap gap-6 mb-20'
+      className='w-full flex flex-row items-center justify-center flex-wrap gap-8'
     >
       {QRCODES.map((qrcode, index) => (
         <div
@@ -16,6 +16,8 @@ export default function QRCodes() {
             value={qrcode.url}
             size={100}
             className='rounded-none p-2 border border-yellow-950'
+            icon={qrcode.icon}
+            iconSize={25}
           />
           <p className='text-base opacity-80'>
             {qrcode.desc}

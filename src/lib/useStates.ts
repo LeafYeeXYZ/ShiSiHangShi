@@ -43,11 +43,10 @@ export const TOTAL_PAGES: number = 14
 export const VERSE_PER_PAGE: number = 2
 /**
  * 显示在页面底部的二维码  
- * @info 第一个 url 会出现在保存的图片中
  */
-export const QRCODES: { desc: string; url: string }[] = [
-  // 第一个 url 会出现在保存的图片中
+export const QRCODES: { desc: string; url: string, icon?: string }[] = [
   { desc: '无限的十四行诗', url: 'https://bnu-sonnet.pages.dev' },
+  { desc: '北师大白鸽青协', url: 'http://weixin.qq.com/r/Q3WGg4PEgkv_KMfgbyDH', icon: '/baige.jpeg' },
 ]
 /**
  * 将所有诗句按照设置的句数和每句的候选数打乱

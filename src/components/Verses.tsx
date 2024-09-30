@@ -1,10 +1,11 @@
-import { useStates, QRCODES } from '../lib/useStates'
-import { Button, QRCode } from 'antd'
+import { useStates } from '../lib/useStates'
+import { Button } from 'antd'
 import { RedoOutlined, SaveOutlined, CloseOutlined } from '@ant-design/icons'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import html2canvas from 'html2canvas'
 import { useRef, useEffect } from 'react'
+import QRCodes from './QRCodes'
 
 export default function Verses() {
 
@@ -46,20 +47,13 @@ export default function Verses() {
         className='w-[28rem] flex flex-col items-center justify-center p-4 absolute -z-50 bg-yellow-50 top-0'
       >
         <div
-          className='w-full flex flex-col items-center justify-center gap-2 p-4 border border-yellow-950'
+          className='w-full flex flex-col items-center justify-center gap-2 p-4 border border-yellow-950 pb-12'
         >
           <div
             ref={containerRef}
-            className='w-full flex flex-col items-center justify-center gap-2 mb-2 mt-5'
+            className='w-full flex flex-col items-center justify-center gap-2 mb-12 mt-5'
           ></div>
-          <QRCode
-            value={QRCODES[0].url}
-            size={80}
-            className='rounded-none p-1 border border-yellow-950 mt-12'
-          />
-          <p className='text-base opacity-80 mb-6'>
-            「无限的十四行诗」
-          </p>
+          <QRCodes />
         </div>
       </div>
 
