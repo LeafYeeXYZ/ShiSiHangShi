@@ -1,7 +1,7 @@
 export default function Introduction() {
 
   return (
-    <div className='w-full max-w-xl text-balance text-center flex flex-col items-center justify-center gap-2 mt-5 mb-24 px-2'>
+    <div className='w-full max-w-xl text-balance text-center flex flex-col items-center justify-center gap-2 mt-5 mb-20 px-2'>
       
       <p className='text-yellow-800'>
         「所有诗句均由支教中的孩子们创作」
