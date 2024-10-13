@@ -73,7 +73,7 @@ export const VERSES: { content: string; author: string }[] = [
 /** 成诗的句数 */
 export const TOTAL_PAGES: number = 14
 /** 每句的候选数 */
-export const VERSE_PER_PAGE: number = +(VERSES.length / TOTAL_PAGES).toFixed(0)
+export const VERSE_PER_PAGE: number = +parseInt((VERSES.length / TOTAL_PAGES) + '')
 /**
  * 显示在页面底部的二维码  
  */
