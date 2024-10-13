@@ -2,7 +2,40 @@ import { create } from 'zustand'
 
 /** 所有诗句 */
 export const VERSES: { content: string; author: string }[] = [
-  { content: '可为何不现身影', author: '刘烁玥' },
+  { content: '变成他，体会他眼里的世界', author: '马小冉' },
+  { content: '假如没有你，世间将何从漫长', author: '殷霞' },
+  { content: '做自由的主旋律', author: '温家磊' },
+  { content: '吹过蒲公英，带他们遨游世界', author: '王雪灏' },
+  { content: '藤的记忆会有很多茎', author: '韦俊慧' },
+  { content: '想象爬上故乡的山头', author: '梁丽' },
+  { content: '我想变成一朵花，别在你的耳梢上', author: '刘骞姝' },
+  { content: '真希望万物能停歇下来', author: '邓晓雪' },
+  { content: '柳树青青，夏至未至，秋将来果', author: '潘蓉程' },
+  { content: '伴随大自然的轻音乐且睡去', author: '张晗雨' },
+  { content: '是谁惊动了那熟睡的小鸟？', author: '孟佳佳' },
+  { content: '我的青春貌似找到了自己的归宿', author: '滚腾越' },
+  { content: '白鸽会引你走向那片天地', author: '佘诗琪' },
+  { content: '弯曲的小路是它唯一的途径', author: '佘诗琪' },
+  { content: '蔚蓝的海是我心脏的声音', author: '朱雨欣' },
+  { content: '夜晚正为我轰鸣', author: '朱雨欣' },
+  { content: '这是我年久失修的亲昵', author: '王雨瑶' },
+  { content: '她在人民的阳光中逆流而上', author: '南山实验小学' },
+  { content: '阴影总统一朝阳光倾覆，为大地披上一件风衣', author: ' 佘诗琪' },
+  { content: '人们的每一次呼吸，都是在与世界诉说密语', author: '佘诗琪' },
+  { content: '自由的使者，穿云破雾，展翅高翔', author: '罗慧玲' },
+  { content: '它的身影，是比肩红日的诗画', author: '罗慧玲' },
+  { content: '自由是什么？', author: '李莎莎' },
+  { content: '自由在山的另一边', author: '张恩豪' },
+  { content: '是一只不求回报的蜜蜂，一朵沉默的黄花，一抹最美的朝霞', author: '南山实验小学' },
+  { content: '红而亮的霞光闪烁着滚动着', author: '孟俐俐' },
+  { content: '我的心里，有说不出的愉快和兴奋', author: '秦国敬' },
+  { content: '沿着海边，慢慢地向前走去', author: '孟俐俐' },
+  { content: '飘到房子上，下一场雨', author: '云南省昆明市富民县款庄中心小学四年级(集体)' },
+  { content: '拉出生命之苦的泥潭', author: '云南省昆明市富民县款庄中心小学五年级(集体)' },
+  { content: '下一场温柔的雨，然后看着青绿的菜芽吸收雨水', author: '云南省昆明市富民县款庄中心小学五年级(集体)' },
+  { content: '我会把他们脸上的汗轻轻吹走', author: '张维' },
+  { content: '用风抚摸她的脸颊', author: '张维' },
+  { content: '可为何不现身影', author: ' 刘烁玥' },
   { content: '梦里的音乐总是伴在夏天', author: '邓晓雪' },
   { content: '就在夏天的风的雨的夜晚', author: '邓晓雪' },
   { content: '我们轻轻地听着音乐的交挽', author: '邓晓雪' },
@@ -36,26 +69,11 @@ export const VERSES: { content: string; author: string }[] = [
   { content: '在那里，灵魂不用自我封闭', author: '佘诗琪' },
   { content: '黑暗仅是黎明，是戏剧结束的幕布', author: '佘诗琪' },
   { content: '你是心中的泪从天空中落下', author: '柏小岚' },
-  { content: '阴影总统一朝阳光倾覆，为大地披上一件风衣', author: ' 佘诗琪' },
-  { content: '人们的每一次呼吸，都是在与世界诉说密语', author: '佘诗琪' },
-  { content: '自由的使者，穿云破雾，展翅高翔', author: '罗慧玲' },
-  { content: '它的身影，是比肩红日的诗画', author: '罗慧玲' },
-  { content: '自由是什么？', author: '李莎莎' },
-  { content: '自由在山的另一边', author: '张恩豪' },
-  { content: '是一只不求回报的蜜蜂，一朵沉默的黄花，一抹最美的朝霞', author: '南山实验小学' },
-  { content: '红而亮的霞光闪烁着滚动着', author: '孟俐俐' },
-  { content: '我的心里，有说不出的愉快和兴奋', author: '秦国敬' },
-  { content: '沿着海边，慢慢地向前走去', author: '孟俐俐' },
-  { content: '飘到房子上，下一场雨', author: '云南省昆明市富民县款庄中心小学四年级(集体)' },
-  { content: '拉出生命之苦的泥潭', author: '云南省昆明市富民县款庄中心小学五年级(集体)' },
-  { content: '下一场温柔的雨，然后看着青绿的菜芽吸收雨水', author: '云南省昆明市富民县款庄中心小学五年级(集体)' },
-  { content: '我会把他们脸上的汗轻轻吹走', author: '张维' },
-  { content: '用风抚摸她的脸颊', author: '张维' },
 ]
 /** 成诗的句数 */
 export const TOTAL_PAGES: number = 14
 /** 每句的候选数 */
-export const VERSE_PER_PAGE: number = 3
+export const VERSE_PER_PAGE: number = +(VERSES.length / TOTAL_PAGES).toFixed(0)
 /**
  * 显示在页面底部的二维码  
  */

@@ -1,8 +1,9 @@
 export default function Title() {
 
   return (
-    <div className='w-full flex flex-col items-center justify-center gap-4 mb-4 mt-20'>
-      <p className='text-3xl mb-8'>
+    <div className='w-full flex flex-col items-center justify-center gap-4 mb-4'>
+      <img src='/banner.JPG' alt='banner' className='h-20 mb-8 mt-10' />
+      <p className='text-3xl mb-8 mt-2'>
         无限的十四行诗
       </p>
       <p className='max-w-xl text-balance text-center px-2 mb-8'>

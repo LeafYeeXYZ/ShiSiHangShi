@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <main
-      className='w-dvw relative flex flex-col items-center justify-center max-w-xl mx-auto px-4 pb-24'
+      className='w-dvw relative flex flex-col items-center justify-center max-w-xl mx-auto px-4 pb-20'
     >
       <ConfigProvider
         theme={{

@@ -7,6 +7,9 @@ export default function QRCodes() {
     <div
       className='w-full flex flex-row items-center justify-center flex-wrap gap-8'
     >
+      <p className='text-yellow-900 text-center text-balance mb-6'>
+        「我们于秋日播种，覆冬雪，迎春阳，等待夏日一场共同的盛放」
+      </p>
       {QRCODES.map((qrcode, index) => (
         <div
           key={index}
@@ -24,6 +27,9 @@ export default function QRCodes() {
           </p>
         </div>
       ))}
+      <p className='text-yellow-900 text-center text-balance mt-4'>
+        「白鸽衔梦，草木贲华」我们共同期待着一场无拘无束、尽致淋漓的成长
+      </p>
     </div>
   )
 }
