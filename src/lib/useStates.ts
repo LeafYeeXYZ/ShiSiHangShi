@@ -235,7 +235,7 @@ export const VERSES: { content: string; author: string }[] = [
     author: "韦俊慧 从江县第二民族中学 云海支教队",
   },
   {
-    content: "在离别时会流露出忧伤7",
+    content: "在离别时会流露出忧伤",
     author: "韦俊慧 从江县第二民族中学 云海支教队",
   },
   {
