@@ -22,10 +22,10 @@ export function Manage() {
 			<img src='/banner.JPG' alt='banner' className='h-20 mb-8 mt-10' />
 			<p className='text-3xl mb-8 mt-2'>无限的十四行诗 - 管理系统</p>
 			<p className='mb-5'>上次同步时间: {getTime(new Date(syncTime))}</p>
-			<p className='mb-2 text-xs text-balance'>
+			<p className='mb-2 text-xs text-balance w-full text-center'>
  				添加/删除诗文前请先输入管理人员密码, 如需修改密码请联系开发者
 			</p>
- 			<p className='mb-8 text-xs text-balance'>
+ 			<p className='mb-8 text-xs text-balance w-full text-center'>
 				常见错误: HTTP 401 (密码错误), Load Failed (网络错误), 其他错误请联系开发者
 			</p>
 			<div className='w-full'>
