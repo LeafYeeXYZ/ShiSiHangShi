@@ -1,7 +1,13 @@
 import { Hono } from 'npm:hono@4.7.5'
 import { cors } from 'npm:hono@4.7.5/cors'
-import { Verse } from '../src/lib/types'
 import { v4 as uuid } from 'npm:uuid@11.1.0'
+
+type Verse = {
+	uuid: string
+	createdAt: number
+	content: string
+	author: string
+}
 
 const app = new Hono()
 const kv = await Deno.openKv()
