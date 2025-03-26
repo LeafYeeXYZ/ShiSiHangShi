@@ -1,4 +1,4 @@
-import { Button, Form, Input, message } from 'antd'
+import { Button, Form, Input, Popconfirm, message } from 'antd'
 import { useState } from 'react'
 import { flushSync } from 'react-dom'
 import type { Verse } from '../lib/types'
@@ -21,10 +21,13 @@ export function Manage() {
 			{contextHolder}
 			<img src='/banner.JPG' alt='banner' className='h-20 mb-8 mt-10' />
 			<p className='text-3xl mb-8 mt-2'>无限的十四行诗 - 管理系统</p>
-			<p className='mb-3'>上次同步时间: {getTime(new Date(syncTime))}</p>
-      <p className='mb-8 text-xs'>
-        常见错误: 401 (密码错误), 400/50X (其他错误, 请联系开发者)
-      </p>
+			<p className='mb-5'>上次同步时间: {getTime(new Date(syncTime))}</p>
+			<p className='mb-2 text-xs text-balance'>
+ 				添加/删除诗文前请先输入管理人员密码, 如需修改密码请联系开发者
+			</p>
+ 			<p className='mb-8 text-xs text-balance'>
+				常见错误: HTTP 401 (密码错误), Load Failed (网络错误), 其他错误请联系开发者
+			</p>
 			<div className='w-full'>
 				<Input
 					addonBefore='管理人员密码'
@@ -62,12 +65,12 @@ export function Manage() {
 						}
 					}}
 				>
-					立即同步
+					立即同步 (无需密码)
 				</Button>
 			</div>
 			<div className='w-full mt-8 text-2xl'>添加诗文</div>
 			<Form
-			 	form={form}
+				form={form}
 				className='w-full mt-8'
 				layout='vertical'
 				onFinish={async (values) => {
@@ -135,11 +138,12 @@ export function Manage() {
 								来自: {verse.author}
 							</p>
 							<div className='mt-2'>
-								<Button
-									type='default'
-									disabled={disabled}
-									block
-									onClick={async () => {
+								<Popconfirm
+									title='确定要删除吗?'
+									okText='确定'
+									cancelText='取消'
+									okButtonProps={{ danger: true }}
+									onConfirm={async () => {
 										try {
 											flushSync(() => setDisabled(true))
 											const res = await fetch(`${server}/api/verses`, {
@@ -169,8 +173,10 @@ export function Manage() {
 										}
 									}}
 								>
-									删除
-								</Button>
+									<Button type='default' disabled={disabled} block>
+										删除
+									</Button>
+								</Popconfirm>
 							</div>
 						</div>
 					))}
