@@ -2,7 +2,10 @@
 
 **北京师范大学白鸽青协委托制作**
 
-## Environment Variables
+## 部署说明
 
-- Client: `VITE_SERVER_URL` (e.g. `https://api.example.com`)
-- Server: `PASSWORD` (e.g. `123456`)
+- 客户端可运行 `bun run build` 构建静态文件, 然后将 `dist` 文件夹放到服务器上
+- 服务端可运行 `deno run -A server/main.ts` 启动, 或部署于 `Deno Deploy` 上
+- 客户端需要设置环境变量 `VITE_SERVER_URL` 指向服务端地址
+- 服务端需要设置环境变量 `PASSWORD` 作为管理员密码
+- 客户端访问 `/manage` 可以进入管理界面, 需要输入密码, 可以上传新的诗句/删除现有诗句
