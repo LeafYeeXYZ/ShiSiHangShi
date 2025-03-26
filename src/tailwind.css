@@ -4,22 +4,22 @@
 
 /* 定义全局样式 */
 * {
-  font-family: 'Noto Sans Serif', 'Times', 'Times New Roman';
-  scrollbar-width: none;
+	font-family: "Noto Sans Serif", "Times", "Times New Roman", sans-serif;
+	scrollbar-width: none;
 }
 
 /* 字体 */
 @font-face {
-  font-family: 'Noto Sans Serif';
-  src: url('/NotoSerifSC-Regular.ttf') format('truetype');
+	font-family: "Noto Sans Serif";
+	src: url("/NotoSerifSC-Regular.ttf") format("truetype");
 }
 
 /* 定义关键帧动画，从透明变为不透明 */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
