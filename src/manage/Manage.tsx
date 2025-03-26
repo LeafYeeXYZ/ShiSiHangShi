@@ -2,6 +2,7 @@ import { Button, Form, Input, message } from 'antd'
 import { useState } from 'react'
 import { flushSync } from 'react-dom'
 import type { Verse } from '../lib/types'
+import { getTime } from '../lib/utils'
 
 const server = import.meta.env.VITE_SERVER_URL || ''
 
@@ -16,6 +17,9 @@ export function Manage() {
       {contextHolder}
 			<img src='/banner.JPG' alt='banner' className='h-20 mb-8 mt-10' />
 			<p className='text-3xl mb-8 mt-2'>无限的十四行诗 - 管理系统</p>
+      <p className='mb-8'>
+        上次同步时间: {getTime(new Date(syncTime))}
+      </p>
 			<div className='w-full'>
 				<Input
 					addonBefore='管理人员密码'
@@ -79,50 +83,54 @@ export function Manage() {
 				</Form.Item>
 			</Form>
 			<div className='w-full mt-8 text-2xl'>查看/删除诗文</div>
-			<div className='w-full flex flex-col items-center justify-center gap-4'>
+			<div className='w-full flex flex-col items-center justify-center gap-4 mt-8'>
 				{verses.map((verse) => (
 					<div
 						key={verse.uuid}
-						className='w-full bg-yellow-50 border border-yellow-950 transition-all'
+						className='w-full bg-yellow-50 border border-yellow-950 transition-all px-4 py-3'
 					>
-						<p className='text-lg leading-[1.25] text-balance'>
+						<p className='text-balance'>
 							{verse.content}
 						</p>
-						<p className='text-xs mt-[0.3rem] pl-[0.1rem] opacity-70'>
+						<p className='text-xs mt-[0.3rem] opacity-70'>
 							来自: {verse.author}
 						</p>
-						<Button
-							type='default'
-							onClick={async () => {
-								try {
-									flushSync(() => setDisabled(true))
-									const res = await fetch(`${server}/api/verses`, {
-										method: 'DELETE',
-										headers: {
-											'Content-Type': 'application/json',
-										},
-										body: JSON.stringify({
-											password,
-											uuid: verse.uuid,
-										}),
-									})
-									if (res.status === 200) {
-										const { verses } = await res.json()
-										setVerses(verses)
-										setSyncTime(Date.now())
-									} else {
-                    throw new Error(`HTTP ${res.status}`)
+            <div className='mt-2'>
+              <Button
+                type='default'
+                disabled={disabled}
+                block
+                onClick={async () => {
+                  try {
+                    flushSync(() => setDisabled(true))
+                    const res = await fetch(`${server}/api/verses`, {
+                      method: 'DELETE',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        password,
+                        uuid: verse.uuid,
+                      }),
+                    })
+                    if (res.status === 200) {
+                      const { verses } = await res.json()
+                      setVerses(verses)
+                      setSyncTime(Date.now())
+                    } else {
+                      throw new Error(`HTTP ${res.status}`)
+                    }
+                    messageApi.success('删除成功')
+                  } catch (e) {
+                    messageApi.error(`删除失败: ${e instanceof Error ? e.message : String(e)}`)
+                  } finally {
+                    setDisabled(false)
                   }
-                  messageApi.success('删除成功')
-								} catch (e) {
-									messageApi.error(`删除失败: ${e instanceof Error ? e.message : String(e)}`)
-								} finally {
-									setDisabled(false)
-								}
-							}}
-						>
-							删除
-						</Button>
+                }}
+              >
+                删除
+              </Button>
+            </div>
 					</div>
 				))}
 			</div>

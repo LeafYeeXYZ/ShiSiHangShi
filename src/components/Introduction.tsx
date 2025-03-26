@@ -1,13 +1,5 @@
 import { useStates } from '../lib/useStates'
-
-function getTime(date: Date): string {
-	const month = date.getMonth() + 1
-	const day = date.getDate()
-	const hour = date.getHours()
-	const minute = date.getMinutes()
-	const second = date.getSeconds()
-	return `${month}月${day}日 ${hour < 10 ? '0' : ''}${hour}:${minute < 10 ? '0' : ''}${minute}:${second < 10 ? '0' : ''}${second}`
-}
+import { getTime } from '../lib/utils'
 
 export default function Introduction() {
 	const versesCount = useStates((state) => state.versesCount)

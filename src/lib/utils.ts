@@ -1,5 +1,14 @@
 import type { Verse } from './types'
 
+export function getTime(date: Date): string {
+	const month = date.getMonth() + 1
+	const day = date.getDate()
+	const hour = date.getHours()
+	const minute = date.getMinutes()
+	const second = date.getSeconds()
+	return `${month}月${day}日 ${hour < 10 ? '0' : ''}${hour}:${minute < 10 ? '0' : ''}${minute}:${second < 10 ? '0' : ''}${second}`
+}
+
 export function uuid(): string {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
 		const r = (Math.random() * 16) | 0
