@@ -12,6 +12,10 @@ export function Manage() {
 	const [syncTime, setSyncTime] = useState<number>(0)
 	const [disabled, setDisabled] = useState<boolean>(false)
 	const [messageApi, contextHolder] = message.useMessage()
+	const [form] = Form.useForm<{
+		content: string
+		author: string
+	}>()
 	return (
 		<div className='w-dvw relative flex flex-col items-center justify-center max-w-xl mx-auto px-4 pb-20'>
 			{contextHolder}
@@ -63,6 +67,7 @@ export function Manage() {
 			</div>
 			<div className='w-full mt-8 text-2xl'>添加诗文</div>
 			<Form
+			 	form={form}
 				className='w-full mt-8'
 				layout='vertical'
 				onFinish={async (values) => {
@@ -85,6 +90,7 @@ export function Manage() {
 						} else {
 							throw new Error(`HTTP ${res.status}`)
 						}
+						form.resetFields()
 						messageApi.success('添加成功')
 					} catch (e) {
 						messageApi.error(
