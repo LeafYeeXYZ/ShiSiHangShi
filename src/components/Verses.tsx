@@ -142,7 +142,9 @@ export default function Verses() {
 							flushSync(() => setDisabled(true))
 							await updateVerses()
 						} catch (e) {
-							messageApi.error(`更新失败: ${e instanceof Error ? e.message : String(e)}`)
+							messageApi.error(
+								`更新失败: ${e instanceof Error ? e.message : String(e)}`,
+							)
 						} finally {
 							setDisabled(false)
 						}
