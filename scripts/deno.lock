@@ -1,0 +1,20 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@psych/sheet@1.0.8": "1.0.8",
+    "npm:hyparquet@1.5.0": "1.5.0"
+  },
+  "jsr": {
+    "@psych/sheet@1.0.8": {
+      "integrity": "4364db50a3e3de28265495beb2e79a40d8e3e65350fe86ca4bd847a6981d1092",
+      "dependencies": [
+        "npm:hyparquet"
+      ]
+    }
+  },
+  "npm": {
+    "hyparquet@1.5.0": {
+      "integrity": "sha512-HW3bj7cHMJ/E1zt280cItUBiLqu996DO9o4JzAYdy96CqiQw1e0sgLUTshV4yH0KXOlHrpt2wHEJqLs51DB0Ww=="
+    }
+  }
+}
