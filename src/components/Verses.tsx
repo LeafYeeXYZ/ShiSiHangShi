@@ -1,12 +1,18 @@
-import { CloseOutlined, RedoOutlined, SaveOutlined, CloudDownloadOutlined, Loading3QuartersOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import {
+	CloseOutlined,
+	CloudDownloadOutlined,
+	Loading3QuartersOutlined,
+	RedoOutlined,
+	SaveOutlined,
+} from '@ant-design/icons'
+import { Button, message } from 'antd'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useStates } from '../lib/useStates'
 import 'swiper/css'
 import html2canvas from 'html2canvas'
 import { useEffect, useRef } from 'react'
-import QRCodes from './QRCodes'
 import { flushSync } from 'react-dom'
+import QRCodes from './QRCodes'
 
 export default function Verses() {
 	const verses = useStates((state) => state.verses)
@@ -14,6 +20,8 @@ export default function Verses() {
 	const disabled = useStates((state) => state.disabled)
 	const setDisabled = useStates((state) => state.setDisabled)
 	const updateVerses = useStates((state) => state.updateVerses)
+
+	const [messageApi, contextHolder] = message.useMessage()
 
 	// 以下内容用于保存图片 (用 Ref 是为了避免重复渲染导致当前诗文被覆盖)
 	const imgRef = useRef<HTMLDivElement>(null)
@@ -88,10 +96,14 @@ export default function Verses() {
 					<Swiper
 						key={Math.random()}
 						className='w-full bg-yellow-50 border border-yellow-950 transition-all'
-						style={!disabled ? {
-							// 随机时间内从透明到不透明
-							animation: `fadeIn 1s ${index * 0.1 + 0.1}s both`,
-						} : {}}
+						style={
+							!disabled
+								? {
+										// 随机时间内从透明到不透明
+										animation: `fadeIn 1s ${index * 0.1 + 0.1}s both`,
+									}
+								: {}
+						}
 						grabCursor={true}
 						onSlideChange={(swiper) => {
 							poemRef.current[index] = verse[swiper.activeIndex].content
@@ -118,13 +130,19 @@ export default function Verses() {
 			<div className='w-full flex flex-row items-center justify-center gap-4 mt-6'>
 				<Button
 					type='default'
-					icon={disabled ? <Loading3QuartersOutlined spin /> : <CloudDownloadOutlined />}
+					icon={
+						disabled ? (
+							<Loading3QuartersOutlined spin />
+						) : (
+							<CloudDownloadOutlined />
+						)
+					}
 					onClick={async () => {
 						try {
 							flushSync(() => setDisabled(true))
 							await updateVerses()
 						} catch (e) {
-							alert(`更新失败: ${e instanceof Error ? e.message : String(e)}`)
+							messageApi.error(`更新失败: ${e instanceof Error ? e.message : String(e)}`)
 						} finally {
 							setDisabled(false)
 						}
@@ -144,6 +162,8 @@ export default function Verses() {
 					保存当前诗文
 				</Button>
 			</div>
+
+			{contextHolder}
 
 			<div
 				style={{ display: 'none' }}

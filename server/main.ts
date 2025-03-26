@@ -42,7 +42,9 @@ app.put('/api/verses', async (c) => {
     author
   }]
   await kv.set(['verses'], newVerses)
-  return new Response('OK')
+  return c.json({
+    verses: newVerses
+  })
 })
 
 app.delete('/api/verses', async (c) => {
@@ -56,7 +58,9 @@ app.delete('/api/verses', async (c) => {
   const oldVerses = (await kv.get<Verse[]>(['verses'])).value || []
   const newVerses = oldVerses.filter((v) => v.uuid !== uuid)
   await kv.set(['verses'], newVerses)
-  return new Response('OK')
+  return c.json({
+    verses: newVerses
+  })
 })
 
 Deno.serve(app.fetch)

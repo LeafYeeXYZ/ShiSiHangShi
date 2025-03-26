@@ -49,11 +49,21 @@ export const useStates = create<States>()((set, get) => ({
 		}
 		const res = await fetch(`${server}/api/verses`)
 		const { verses } = await res.json()
-		if (!Array.isArray(verses) || !verses.every((v) => ((typeof v === 'object') && (typeof v.uuid === 'string') && (typeof v.createdAt === 'number') && (typeof v.content === 'string') && (typeof v.author === 'string')))) {
+		if (
+			!Array.isArray(verses) ||
+			!verses.every(
+				(v) =>
+					typeof v === 'object' &&
+					typeof v.uuid === 'string' &&
+					typeof v.createdAt === 'number' &&
+					typeof v.content === 'string' &&
+					typeof v.author === 'string',
+			)
+		) {
 			throw new Error('获取诗文列表失败')
 		}
 		const newVerses = [...verses, ...VERSES]
-		set({ 
+		set({
 			allVerses: newVerses,
 			verses: order(newVerses, TOTAL_PAGES),
 			versesCount: newVerses.length,
