@@ -51,7 +51,25 @@ export default function Verses() {
       )
       await document.fonts.load('18px "Noto Serif SC"', poemRef.current.join(''))
       await document.fonts.ready
-      const canvas = await html2canvas(image)
+      // Keep the export layout even if the cloned iframe cannot reload stylesheets.
+      const elements = [image, ...image.querySelectorAll<HTMLElement | SVGElement>('*')]
+      const styles = elements.map((element) => {
+        const computed = getComputedStyle(element)
+        return Array.from(computed, (property) => [property, computed.getPropertyValue(property)])
+      })
+      const canvas = await html2canvas(image, {
+        onclone: (_document, clonedImage) => {
+          const clones = [
+            clonedImage,
+            ...clonedImage.querySelectorAll<HTMLElement | SVGElement>('*'),
+          ]
+          clones.forEach((element, index) => {
+            styles[index]?.forEach(([property, value]) =>
+              element.style.setProperty(property, value),
+            )
+          })
+        },
+      })
       const url = canvas.toDataURL('image/png')
       const a = document.createElement('a')
       a.href = url

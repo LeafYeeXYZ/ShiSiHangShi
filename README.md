@@ -71,5 +71,9 @@ vp run deploy
 ```
 
 `wrangler.jsonc` 已绑定现有 `sonnet` D1 数据库。`workers_dev` 为 false，
+`deploy` 会在发布前应用尚未执行的数据库迁移。Cloudflare Workers Builds 的构建命令使用
+`pnpm exec vp build`，部署命令使用
+`pnpm run db:migrate:remote && pnpm exec wrangler deploy`，确保发布前先执行迁移。
+构建使用的 API Token 需要包含此账号的 D1 编辑权限。
 线上域名需在 Cloudflare 中关联到 `bnu-sonnet` Worker。
 静态页面采用单页应用回退；`/api` 和 `/api/*` 优先交给 Worker，未知 API 返回 JSON 404。

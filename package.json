@@ -10,7 +10,7 @@
     "db:migrate:local": "wrangler d1 migrations apply SONNET_DB --local",
     "db:migrate:remote": "wrangler d1 migrations apply SONNET_DB --remote",
     "deploy:check": "vp build && wrangler deploy --dry-run",
-    "deploy": "vp build && wrangler deploy"
+    "deploy": "vp build && wrangler d1 migrations apply SONNET_DB --remote && wrangler deploy"
   },
   "dependencies": {
     "@ant-design/icons": "^6.3.4",
