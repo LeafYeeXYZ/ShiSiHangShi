@@ -35,12 +35,14 @@ export function Manage() {
           value={password}
           disabled={disabled}
           onChange={(e) => setPassword(e.target.value)}
+          className="rounded-none! border! border-yellow-950!"
         />
       </div>
       <div className="mt-4 w-full">
         <Button
           block
           disabled={disabled}
+          className="rounded-none! border! border-yellow-950!"
           onClick={async () => {
             try {
               flushSync(() => setDisabled(true))
@@ -65,10 +67,10 @@ export function Manage() {
           立即同步 (无需密码)
         </Button>
       </div>
-      <div className="mt-8 w-full text-2xl">添加诗文</div>
+      <div className="my-8 w-full text-2xl">添加诗文</div>
       <Form
         form={form}
-        className="mt-8 w-full"
+        className="w-full"
         layout="vertical"
         onFinish={async (values) => {
           try {
@@ -104,23 +106,36 @@ export function Manage() {
           name="content"
           rules={[{ required: true, message: '请输入诗文内容' }]}
         >
-          <Input.TextArea placeholder="请输入诗文内容" disabled={disabled} />
+          <Input.TextArea
+            placeholder="请输入诗文内容"
+            disabled={disabled}
+            className="rounded-none! border! border-yellow-950!"
+          />
         </Form.Item>
         <Form.Item
           label="诗文作者"
           name="author"
           rules={[{ required: true, message: '请输入诗文作者' }]}
         >
-          <Input placeholder="请输入诗文作者" disabled={disabled} />
+          <Input
+            placeholder="请输入诗文作者"
+            disabled={disabled}
+            className="rounded-none! border! border-yellow-950!"
+          />
         </Form.Item>
         <Form.Item>
-          <Button block htmlType="submit" disabled={disabled}>
+          <Button
+            block
+            htmlType="submit"
+            disabled={disabled}
+            className="rounded-none! border! border-yellow-950!"
+          >
             添加
           </Button>
         </Form.Item>
       </Form>
-      <div className="mt-8 w-full text-2xl">查看/删除诗文</div>
-      <div className="mt-8 flex w-full flex-col items-center justify-center gap-4">
+      <div className="my-8 w-full text-2xl">查看/删除诗文</div>
+      <div className="flex w-full flex-col items-center justify-center gap-4">
         {verses
           .sort((a, b) => b.createdAt - a.createdAt) // 最后添加的在最前面
           .map((verse) => (
@@ -164,7 +179,12 @@ export function Manage() {
                     }
                   }}
                 >
-                  <Button type="default" disabled={disabled} block>
+                  <Button
+                    type="default"
+                    disabled={disabled}
+                    block
+                    className="rounded-none! border! border-yellow-950!"
+                  >
                     删除
                   </Button>
                 </Popconfirm>
