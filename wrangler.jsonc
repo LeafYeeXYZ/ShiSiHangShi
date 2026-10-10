@@ -1,0 +1,38 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "bnu-sonnet",
+  "compatibility_date": "2026-10-10",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist/",
+    "not_found_handling": "single-page-application",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api", "/api/*"],
+  },
+  "main": "./worker/index.ts",
+  "workers_dev": false,
+  "secrets": {
+    "required": ["PASSWORD"],
+  },
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true,
+    },
+    "traces": {
+      "enabled": true,
+      "persist": true,
+      "head_sampling_rate": 1,
+    },
+  },
+  "d1_databases": [
+    {
+      "binding": "SONNET_DB",
+      "database_id": "188c0cd5-d394-4211-8480-f83d5449a649",
+      "database_name": "sonnet",
+      "migrations_dir": "./worker/migrations",
+    },
+  ],
+}
