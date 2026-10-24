@@ -28,6 +28,23 @@ vp dev
 密码错误返回 401；JSON 或字段错误返回 400；请求体超过 64 KiB 返回 413；
 未配置管理员密码时写入返回 503，公开读取仍可使用。
 
+### 限流与缓存
+
+API 在解析请求体、密码验证和数据库访问之前限流。按 Cloudflare 提供的
+`CF-Connecting-IP` 分组, 不信任 `X-Forwarded-For`; 缺少 IP 的请求共用一个限额。
+`READ_RATE_LIMITER` 默认每分钟 200 次, `WRITE_RATE_LIMITER` 默认每分钟 20 次,
+PUT/DELETE 共用写入限额, 密码错误也计数。超限返回 JSON 429 和 `Retry-After: 60`。
+阈值在 `wrangler.jsonc` 的 `ratelimits` 中调整。计数是 Cloudflare 每个节点的近似限制,
+不是全球严格配额; 校园网等共享出口会共用 IP 限额, 可按实际流量提高读取阈值。
+
+公开 GET 列表使用 Cache API 缓存 300 秒, 响应以 `X-Cache: HIT/MISS` 标识。
+每次读取先查询 D1 的单行版本号, 命中后无需扫描或传输完整诗句表。
+迁移 `0002` 添加版本表及 INSERT/UPDATE/DELETE 触发器, 数据变更与版本更新同事务提交,
+各节点下一次读取自动使用新缓存键。并发旧请求只能写入旧版本键, 不会污染新版本缓存。
+直接通过 D1 修改诗句也会使缓存失效。缓存故障回退到 D1; 数据库故障仍返回 500。
+浏览器、写入响应及错误响应保持 `Cache-Control: no-store`, 不缓存密码或管理操作。
+部署前必须应用全部迁移, 现有部署脚本已包含此步骤, 不需要新建 KV 或 Redis。
+
 `data/original.json` 中的初始诗句与 `data/migrate.json` 中的旧服务端诗句均由前端直接导入，
 不写入 D1，也不出现在管理列表中；修改或删除这些诗句需编辑对应 JSON 文件。
 `data/migrate.json` 是 2026-10-10 从旧公开接口

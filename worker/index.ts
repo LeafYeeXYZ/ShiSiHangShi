@@ -13,11 +13,53 @@ app.use('/api/*', async (c, next) => {
   c.header('Cache-Control', 'no-store')
   await next()
 })
+// Limit before reading bodies, checking passwords, or accessing D1/cache.
+app.use('/api/*', async (c, next) => {
+  const write = c.req.method === 'PUT' || c.req.method === 'DELETE'
+  const limiter = write ? c.env.WRITE_RATE_LIMITER : c.env.READ_RATE_LIMITER
+  // Only trust Cloudflare's client IP; forwarded headers are caller-controlled.
+  const ip = c.req.header('CF-Connecting-IP') || 'unknown'
+  const { success } = await limiter.limit({ key: `bnu-sonnet:${ip}` })
+  if (!success) {
+    c.header('Retry-After', '60')
+    throw new HTTPException(429, { message: 'Too Many Requests' })
+  }
+  await next()
+})
 app.use('/api/*', bodyLimit({ maxSize: 64 * 1024 }))
 
 app.get('/api/verses', async (c) => {
+  // One indexed row read validates caches across all Cloudflare locations.
+  // Triggers update the revision in the same transaction as every verse mutation.
+  const revision = await c.env.SONNET_DB.prepare(
+    'SELECT revision FROM verse_cache_revision WHERE id = 1',
+  ).first<string>('revision')
+  if (!revision) throw new Error('Verse cache revision is missing')
+  const key = new URL('/api/verses', c.req.url)
+  key.searchParams.set('revision', revision)
+  const cache = caches.default
+  try {
+    const cached = await cache.match(key.toString())
+    if (cached) {
+      c.header('X-Cache', 'HIT')
+      // Keep browser/CDN caching disabled; only the internal versioned cache is shared.
+      return c.body(await cached.text(), 200, { 'Content-Type': 'application/json' })
+    }
+  } catch {
+    console.warn(JSON.stringify({ event: 'verse_cache_read_failed' }))
+  }
   const { results } = await c.env.SONNET_DB.prepare(selectVerses).all<Verse>()
-  return c.json({ verses: results })
+  const body = JSON.stringify({ verses: results })
+  const cached = new Response(body, {
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' },
+  })
+  c.executionCtx.waitUntil(
+    cache.put(key.toString(), cached).catch(() => {
+      console.warn(JSON.stringify({ event: 'verse_cache_write_failed' }))
+    }),
+  )
+  c.header('X-Cache', 'MISS')
+  return c.body(body, 200, { 'Content-Type': 'application/json' })
 })
 
 app.use('/api/verses', async (c, next) => {
