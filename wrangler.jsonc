@@ -27,6 +27,18 @@
       "head_sampling_rate": 1,
     },
   },
+  "ratelimits": [
+    {
+      "name": "READ_RATE_LIMITER",
+      "namespace_id": "8628987851",
+      "simple": { "limit": 200, "period": 60 },
+    },
+    {
+      "name": "WRITE_RATE_LIMITER",
+      "namespace_id": "8628987852",
+      "simple": { "limit": 20, "period": 60 },
+    },
+  ],
   "d1_databases": [
     {
       "binding": "SONNET_DB",
